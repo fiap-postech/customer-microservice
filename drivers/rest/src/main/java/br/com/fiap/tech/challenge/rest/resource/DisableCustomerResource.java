@@ -1,7 +1,6 @@
 package br.com.fiap.tech.challenge.rest.resource;
 
 import br.com.fiap.tech.challenge.adapter.controller.customer.UpgradeCustomerController;
-import br.com.fiap.tech.challenge.enterprise.validation.DocumentCustomer;
 import br.com.fiap.tech.challenge.rest.mapping.CustomerResponseMapper;
 import br.com.fiap.tech.challenge.rest.resource.doc.DisableCustomerResourceDoc;
 import br.com.fiap.tech.challenge.rest.resource.response.CustomerResponse;
@@ -23,7 +22,7 @@ public class DisableCustomerResource implements DisableCustomerResourceDoc {
 
 
     @PatchMapping("/{document}/disable")
-    public ResponseEntity<CustomerResponse> disable(@PathVariable("document") @DocumentCustomer String document) {
+    public ResponseEntity<CustomerResponse> disable(@PathVariable("document") String document) {
         return upgradeCustomerController.disable(document)
                 .map(customer -> ResponseEntity.ok(responseMapper.toResponse(customer)))
                 .orElse(ResponseEntity.noContent().build());

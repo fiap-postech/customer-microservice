@@ -1,5 +1,6 @@
 package br.com.fiap.tech.challenge.rest.resource.doc;
 
+import br.com.fiap.tech.challenge.enterprise.validation.DocumentCustomer;
 import br.com.fiap.tech.challenge.rest.common.handler.error.ApiErrorResponse;
 import br.com.fiap.tech.challenge.rest.resource.response.CustomerResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,6 +23,6 @@ public interface QueryCustomerResourceDoc {
                 @ApiResponse(responseCode = "400", description = "Retorno em caso que o documento informado é inválido", content = { @Content(schema = @Schema(implementation = ApiErrorResponse.class), mediaType = "application/json") })
             }
     )
-    ResponseEntity<CustomerResponse> getByDocument(@Parameter(description = "Documento para pesquisa de um cliente", required = true) String document);
+    ResponseEntity<CustomerResponse> getByDocument(@DocumentCustomer  @Parameter(description = "Documento para pesquisa de um cliente", required = true) String document);
 
 }

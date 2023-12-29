@@ -1,7 +1,6 @@
 package br.com.fiap.tech.challenge.rest.resource;
 
 import br.com.fiap.tech.challenge.adapter.controller.customer.FindCustomerByDocumentController;
-import br.com.fiap.tech.challenge.enterprise.validation.DocumentCustomer;
 import br.com.fiap.tech.challenge.rest.mapping.CustomerResponseMapper;
 import br.com.fiap.tech.challenge.rest.resource.doc.QueryCustomerResourceDoc;
 import br.com.fiap.tech.challenge.rest.resource.response.CustomerResponse;
@@ -21,9 +20,8 @@ public class QueryCustomerResource implements QueryCustomerResourceDoc {
 
     private final FindCustomerByDocumentController findCustomerByDocumentController;
 
-
     @GetMapping
-    public ResponseEntity<CustomerResponse> getByDocument(@RequestParam("document") @DocumentCustomer String document) {
+    public ResponseEntity<CustomerResponse> getByDocument(@RequestParam("document") String document) {
         return findCustomerByDocumentController.get(document)
                 .map(customer -> ResponseEntity.ok(responseMapper.toResponse(customer)))
                 .orElse(ResponseEntity.noContent().build());
