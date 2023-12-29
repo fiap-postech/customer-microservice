@@ -4,11 +4,15 @@ import br.com.fiap.tech.challenge.driven.mysql.model.CustomerEntity;
 import br.com.fiap.tech.challenge.adapter.dto.CustomerDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
 @Mapper(componentModel = SPRING)
 public interface DBCustomerMapper {
+
+    DBCustomerMapper INSTANCE = Mappers.getMapper(DBCustomerMapper.class);
+
     @Mapping(target = "id", source = "uuid")
     CustomerDTO toDTO(CustomerEntity entity);
 
