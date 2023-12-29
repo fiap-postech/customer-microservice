@@ -1,0 +1,51 @@
+plugins {
+    alias(sharedLibs.plugins.spring.boot.plugin)
+    alias(sharedLibs.plugins.flyway.plugin)
+    alias(sharedLibs.plugins.spring.dependency.management.plugin)
+}
+
+version '1.0.0'
+
+dependencies {
+    implementation project(":adapter")
+    implementation project(":drivers:mysql")
+    implementation project(":drivers:rest")
+    implementation sharedLibs.spring.boot.starter.actuator
+    implementation sharedLibs.spring.boot.starter.data.jpa
+    implementation sharedLibs.spring.boot.starter.logging
+    implementation sharedLibs.spring.cloud.starter.openfeign
+    implementation sharedLibs.spring.boot.starter.validation
+    implementation sharedLibs.spring.boot.starter.web
+    implementation sharedLibs.spring.data.commons
+    implementation sharedLibs.springdoc.openapi.starter.webmvc.ui
+
+    runtimeOnly sharedLibs.flyway.mysql
+
+    testImplementation sharedLibs.instancio.core
+    testImplementation sharedLibs.instancio.junit
+    testImplementation sharedLibs.json.schema.validator
+    testImplementation sharedLibs.rest.assured
+    testImplementation sharedLibs.spring.boot.starter.test
+    testImplementation sharedLibs.testcontainers.junit.jupiter
+    testImplementation sharedLibs.testcontainers.localstack
+    testImplementation sharedLibs.testcontainers.mysql
+}
+
+java {
+    processResources {
+        expand(project.properties)
+    }
+}
+
+springBoot {
+    buildInfo {
+        properties {
+            name = 'tech challenge api'
+            additional = [
+                    "description": project?.description ?= "",
+                    "version"    : project.version
+            ]
+        }
+    }
+}
+

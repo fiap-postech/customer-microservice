@@ -1,0 +1,19 @@
+plugins {
+    id 'java-library'
+}
+
+version '1.0.0'
+
+dependencies {
+    api sharedLibs.jakarta.validation.api
+    api sharedLibs.spring.boot.starter.test
+    api sharedLibs.spring.boot.starter.json
+    api sharedLibs.instancio.core
+    api sharedLibs.instancio.junit
+
+    api project(":adapter")
+}
+
+configurations.implementation {
+    exclude group: 'org.testng ', module: 'testng'
+}

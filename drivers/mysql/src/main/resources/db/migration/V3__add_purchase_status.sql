@@ -1,0 +1,1 @@
+alter table purchase modify column status enum('PAID', 'MAKING', 'PREPARED', 'DELIVERED', 'FINISHED', 'WAITING_PAID', 'MADE') not null default 'PAID';
