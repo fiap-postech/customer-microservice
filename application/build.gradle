@@ -7,9 +7,16 @@ version '1.0.0'
 dependencies {
     compileOnly sharedLibs.jakarta.validation.api
 
-    api sharedLibs.moneta
     api project(":enterprise")
     api libs.domain.common
+    api sharedLibs.moneta
+
+    testImplementation sharedLibs.assertj.core
+    testImplementation sharedLibs.instancio.core
+    testImplementation sharedLibs.instancio.junit
+    testImplementation sharedLibs.spring.boot.starter.json
+    testImplementation sharedLibs.spring.boot.starter.test
+    testImplementation sharedLibs.spring.boot.starter.validation
 }
 
 configurations.implementation {
