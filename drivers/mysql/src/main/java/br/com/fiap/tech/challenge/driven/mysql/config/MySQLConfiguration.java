@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaAuditing
-@EnableJpaRepositories("br.com.fiap.tech.challenge.adapter.driven.mysql.repository")
-@EntityScan("br.com.fiap.tech.challenge.adapter.driven.mysql.model")
-@ComponentScan("br.com.fiap.tech.challenge.adapter.driven.mysql")
+@EnableJpaRepositories("br.com.fiap.tech.challenge.driven.mysql.repository")
+@EntityScan("br.com.fiap.tech.challenge.driven.mysql.model")
+@ComponentScan("br.com.fiap.tech.challenge.driven.mysql")
 public class MySQLConfiguration {
 }
 
