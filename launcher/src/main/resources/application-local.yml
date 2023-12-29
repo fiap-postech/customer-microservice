@@ -3,7 +3,7 @@ server:
 
 db:
   host: localhost
-  schema: tech_challenge
+  schema: customer
   username: sys_tech_challenge
   password: 6#233zJMNTjkQb#sgps#
-  port: 3366
+  port: 3376
