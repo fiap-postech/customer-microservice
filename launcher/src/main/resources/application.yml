@@ -9,11 +9,6 @@ spring:
     password: \${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa.hibernate.ddl-auto: none
-  data:
-    redis:
-      host: localhost
-      port: 6380
-      time-to-live: 3600000
 
 server.port: 8080
 
