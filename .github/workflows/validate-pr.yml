@@ -23,6 +23,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
     
       - id: gradle_build
         name: Execute Gradle build
