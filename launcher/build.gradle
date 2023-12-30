@@ -27,7 +27,6 @@ dependencies {
     testImplementation sharedLibs.rest.assured
     testImplementation sharedLibs.spring.boot.starter.test
     testImplementation sharedLibs.testcontainers.junit.jupiter
-    testImplementation sharedLibs.testcontainers.localstack
     testImplementation sharedLibs.testcontainers.mysql
 }
 
