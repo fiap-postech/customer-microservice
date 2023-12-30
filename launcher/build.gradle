@@ -1,7 +1,9 @@
 plugins {
+    id "jacoco"
     alias(sharedLibs.plugins.spring.boot.plugin)
     alias(sharedLibs.plugins.flyway.plugin)
     alias(sharedLibs.plugins.spring.dependency.management.plugin)
+    id "org.sonarqube" version "4.4.1.3373"
 }
 
 version '1.0.0'
@@ -48,3 +50,16 @@ springBoot {
     }
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
+sonarqube {
+    properties {
+//        property 'sonar.host.url', 'https://sonarcloud.io'
+        property 'sonar.organization', 'fiap-postech'
+        property 'sonar.projectKey', 'fiap-postech_customer-microservice'
+    }
+}

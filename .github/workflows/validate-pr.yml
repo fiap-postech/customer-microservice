@@ -21,15 +21,21 @@ jobs:
           distribution: 'zulu'
           architecture: x64
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-        with:
-          arguments: build
-        env:
-          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
-
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
+      - name: Build and analyze
+        run: ./gradlew build jacocoTestReport sonarqube --info
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+#      - name: Build Package
+#        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
+#        with:
+#          arguments: build
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
+
+#      - name: SonarCloud Scan
+#        uses: sonarsource/sonarcloud-github-action@master
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
