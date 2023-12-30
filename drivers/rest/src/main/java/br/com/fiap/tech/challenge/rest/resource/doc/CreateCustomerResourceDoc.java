@@ -16,7 +16,8 @@ public interface CreateCustomerResourceDoc {
             description = "Cadastra um novo cliente no banco de dados.",
             responses = {
                 @ApiResponse(responseCode = "201", description = "Retorno em caso de sucesso em que o cliente foi cadastrado", content = { @Content(schema = @Schema(implementation = CustomerResponse.class), mediaType = "application/json") }),
-                @ApiResponse(responseCode = "400", description = "Retorno informando qual campo do cliente está incorreto e por qual motivo", content = { @Content(schema = @Schema(implementation = ApiErrorResponse.class), mediaType = "application/json") })
+                @ApiResponse(responseCode = "400", description = "Retorno informando qual campo do cliente está incorreto e por qual motivo", content = { @Content(schema = @Schema(implementation = ApiErrorResponse.class), mediaType = "application/json") }),
+                @ApiResponse(responseCode = "409", description = "Retorno em caso de tentar criar cliente com CPF que já foi usado por outro cliente", content = { @Content(schema = @Schema(implementation = ApiErrorResponse.class), mediaType = "application/json") })
             }
     )
     CustomerResponse create(CreateCustomerRequest request);
