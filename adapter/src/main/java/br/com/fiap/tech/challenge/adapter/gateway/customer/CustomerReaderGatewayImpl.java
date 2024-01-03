@@ -17,8 +17,9 @@ class CustomerReaderGatewayImpl implements CustomerReaderGateway {
     private final CustomerReaderRepository readerRepository;
 
     @Override
-    public Customer readById(UUID id) {
-        return MAPPER.toDomain(readerRepository.readById(id.toString()));
+    public Optional<Customer> readById(UUID id) {
+        return readerRepository.readById(id.toString())
+                .map(MAPPER::toDomain);
     }
 
     @Override

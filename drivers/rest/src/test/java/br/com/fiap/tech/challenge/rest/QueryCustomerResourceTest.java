@@ -1,6 +1,7 @@
 package br.com.fiap.tech.challenge.rest;
 
 import br.com.fiap.tech.challenge.adapter.controller.customer.FindCustomerByDocumentController;
+import br.com.fiap.tech.challenge.adapter.controller.customer.FindCustomerByUUIDController;
 import br.com.fiap.tech.challenge.rest.mapping.CustomerResponseMapper;
 import br.com.fiap.tech.challenge.rest.resource.QueryCustomerResource;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,6 @@ import static br.com.fiap.tech.challenge.fixture.Fixture.create;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,6 +22,9 @@ class QueryCustomerResourceTest extends ResourceBaseTestSuite<QueryCustomerResou
 
     @Mock
     private FindCustomerByDocumentController findCustomerByDocumentController;
+
+    @Mock
+    private FindCustomerByUUIDController findCustomerByUUIDController;
 
     @Test
     void shouldQuerySuccessFullyWhenCustomerExists() throws Exception {
@@ -71,7 +74,8 @@ class QueryCustomerResourceTest extends ResourceBaseTestSuite<QueryCustomerResou
     QueryCustomerResource createController() {
         return new QueryCustomerResource(
                 CustomerResponseMapper.INSTANCE,
-                findCustomerByDocumentController
+                findCustomerByDocumentController,
+                findCustomerByUUIDController
         );
     }
 }

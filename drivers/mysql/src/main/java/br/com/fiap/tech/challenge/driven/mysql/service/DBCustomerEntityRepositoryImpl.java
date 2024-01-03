@@ -22,11 +22,9 @@ public class DBCustomerEntityRepositoryImpl implements CustomerWriterRepository,
     private final DBCustomerMapper mapper;
 
     @Override
-    public CustomerDTO readById(String id) {
-        var entity = repository.findByUuid(id)
-                .orElseThrow(() -> new ApplicationException(CUSTOMER_NOT_FOUND_BY_UUID, id));
-
-        return mapper.toDTO(entity);
+    public Optional<CustomerDTO> readById(String id) {
+        return repository.findByUuid(id)
+                .map(mapper::toDTO);
     }
 
     @Override

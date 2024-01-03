@@ -23,4 +23,7 @@ public class CustomerResponse extends Response {
 
     @Schema(description = "Documento do Cliente", example = "02903784000")
     private String document;
+
+    @Schema(description = "Cliente está ativo para realizar compras", example = "true")
+    private boolean enabled;
 }

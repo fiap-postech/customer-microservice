@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface CustomerReaderGateway {
 
-    Customer readById(UUID id);
+    Optional<Customer> readById(UUID id);
+
     Optional<Customer> readByDocument(Document document);
 }
