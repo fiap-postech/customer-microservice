@@ -49,26 +49,29 @@ class DBCustomerEntityRepositoryImplTest {
 
             var response = service.readById(UUID.randomUUID().toString());
 
-            assertThat(response).isNotNull();
-            assertThat(response.getDocument()).isEqualTo(customerEntity.getDocument());
-            assertThat(response.getName()).isEqualTo(customerEntity.getName());
-            assertThat(response.getEmail()).isEqualTo(customerEntity.getEmail());
-            assertThat(response.getId()).isEqualTo(customerEntity.getUuid());
+            assertThat(response).isNotNull().isPresent();
+
+            response.ifPresent(customer -> {
+                assertThat(customer.getDocument()).isEqualTo(customerEntity.getDocument());
+                assertThat(customer.getName()).isEqualTo(customerEntity.getName());
+                assertThat(customer.getEmail()).isEqualTo(customerEntity.getEmail());
+                assertThat(customer.getId()).isEqualTo(customerEntity.getUuid());
+            });
 
             verify(repository).findByUuid(any(String.class));
         }
 
         @Test
-        void shouldThrowExceptionWhenCustomerDoesNotExists() {
+        void shouldReturnEmptyWhenCustomerDoesNotExists() {
             var uuid = UUID.randomUUID().toString();
 
             when(repository.findByUuid(uuid)).thenReturn(Optional.empty());
 
-            var exception = new ApplicationException(CUSTOMER_NOT_FOUND_BY_UUID, uuid);
+            var response = service.readById(uuid);
 
-            assertThatThrownBy(() -> service.readById(uuid))
-                    .isInstanceOf(ApplicationException.class)
-                    .hasMessage(exception.getMessage());
+            assertThat(response)
+                    .isNotNull()
+                    .isNotPresent();
 
             verify(repository).findByUuid(uuid);
         }

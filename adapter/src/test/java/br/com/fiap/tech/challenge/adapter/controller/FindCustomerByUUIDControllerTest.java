@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static br.com.fiap.tech.challenge.adapter.fixture.CustomerDTOFixture.enabledCustomerDTOModel;
@@ -47,32 +48,34 @@ class FindCustomerByUUIDControllerTest {
         var customerDTO = create(enabledCustomerDTOModel());
         var uuid = customer.uuid();
 
-        when(useCase.get(uuid)).thenReturn(customer);
+        when(useCase.get(uuid)).thenReturn(Optional.of(customer));
         when(presenter.present(customer)).thenReturn(customerDTO);
 
         var response = controller.get(uuid.toString());
 
         assertThat(response)
                 .isNotNull()
-                .isEqualTo(customerDTO);
+                .isPresent()
+                .contains(customerDTO);
 
         verify(useCase).get(uuid);
         verify(presenter).present(customer);
     }
 
     @Test
-    void shouldThrowExceptionWhenNotExists() {
+    void shouldReturnEmptyWhenNotExists() {
         var uuid = UUID.randomUUID();
 
-        var exception = new ApplicationException(CUSTOMER_NOT_FOUND_BY_UUID, uuid.toString());
+        when(useCase.get(uuid)).thenReturn(Optional.empty());
 
-        when(useCase.get(uuid)).thenThrow(exception);
+        var uuidText = uuid.toString();
 
-        var UUIDText = uuid.toString();
+        var response = controller.get(uuidText);
 
-        assertThatThrownBy(() -> controller.get(UUIDText))
-                .isInstanceOf(ApplicationException.class)
-                .hasMessage(exception.getMessage());
+        assertThat(response)
+                .isNotNull()
+                .isNotPresent();
+
 
         verify(useCase).get(uuid);
         verify(presenter, never()).present(any(Customer.class));

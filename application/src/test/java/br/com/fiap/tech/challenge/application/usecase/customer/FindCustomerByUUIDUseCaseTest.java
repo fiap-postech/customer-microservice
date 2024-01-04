@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static br.com.fiap.tech.challenge.application.fixture.CustomerFixture.enabledCustomerModel;
@@ -37,27 +38,29 @@ class FindCustomerByUUIDUseCaseTest {
         var customer = create(enabledCustomerModel());
         var uuid = customer.uuid();
 
-        when(readerGateway.readById(uuid)).thenReturn(customer);
+        when(readerGateway.readById(uuid)).thenReturn(Optional.of(customer));
 
         var response = useCase.get(uuid);
 
         assertThat(response)
                 .isNotNull()
-                .isEqualTo(customer);
+                .isPresent()
+                .contains(customer);
 
         verify(readerGateway).readById(uuid);
     }
 
     @Test
-    void shouldThrowExceptionIfCustomerDoesNotExists() {
+    void shouldReturnEmptyIfCustomerDoesNotExists() {
         var uuid = UUID.randomUUID();
-        var exception = new ApplicationException(CUSTOMER_NOT_FOUND_BY_UUID, uuid.toString());
 
-        when(readerGateway.readById(uuid)).thenThrow(exception);
+        when(readerGateway.readById(uuid)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> useCase.get(uuid))
-                .isInstanceOf(ApplicationException.class)
-                .hasMessage(exception.getMessage());
+        var response = useCase.get(uuid);
+
+        assertThat(response)
+                .isNotNull()
+                .isNotPresent();
 
         verify(readerGateway).readById(uuid);
     }
