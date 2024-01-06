@@ -49,10 +49,10 @@ springBoot {
 }
 
 scmVersion {
-    localOnly = true
-    versionIncrementer 'incrementPatch' // increment minor by default
+    versionIncrementer 'incrementPatch'
     branchVersionIncrementer = [
-            'hotfix/.*': 'incrementPatch', // on hotfix branches - increment patch
+            'hotfix/.*': 'incrementPatch',
+            'feature/.*': 'incrementMinor',
     ]
 }
 
