@@ -19,14 +19,14 @@ jobs:
       - name: Download Jar File
         uses: dsaltares/fetch-gh-release-asset@master
         with:
-          version: tags/${{ env.GITHUB_REF_NAME }}
-          file: customer-service.jar
+          version: 'tags/${{ env.GITHUB_REF_NAME }}'
+          file: 'customer-service.jar'
 
       - name: Download Dockerfile
         uses: dsaltares/fetch-gh-release-asset@master
         with:
-          version: tags/${{ env.GITHUB_REF_NAME }}
-          file: Dockerfile
+          version: 'tags/${{ env.GITHUB_REF_NAME }}'
+          file: 'Dockerfile'
 
       - name: LS
         run: |
