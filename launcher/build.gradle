@@ -30,6 +30,19 @@ dependencies {
     testImplementation sharedLibs.testcontainers.mysql
 }
 
+scmVersion {
+    repository {
+        type = "git"
+        remote = "origin"
+    }
+
+    versionIncrementer 'incrementPatch'
+    branchVersionIncrementer = [
+            'hotfix/.*': 'incrementPatch',
+            'feature/.*': 'incrementMinor',
+    ]
+}
+
 java {
     processResources {
         expand(project.properties)
@@ -50,19 +63,6 @@ springBoot {
             ]
         }
     }
-}
-
-scmVersion {
-    repository {
-        type = "git"
-        remote = "origin"
-    }
-
-    versionIncrementer 'incrementPatch'
-    branchVersionIncrementer = [
-            'hotfix/.*': 'incrementPatch',
-            'feature/.*': 'incrementMinor',
-    ]
 }
 
 version = scmVersion.version
