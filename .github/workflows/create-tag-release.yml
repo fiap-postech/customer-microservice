@@ -1,4 +1,4 @@
-name: Create Project Release
+name: Create Tag Release
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    name: Create New Release
+    name: Create New Tag Release
     runs-on: ubuntu-latest
 
     steps:
@@ -23,11 +23,11 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available
+          distribution: 'zulu'
 
       - name: Build Project
         env:
-          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build -x test
 
