@@ -16,10 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: REF_NAME
-        run: |
-          echo "tags/${{ github.ref_name }}"
-
       - name: Download Jar File
         uses: dsaltares/fetch-gh-release-asset@master
         with:
@@ -29,7 +25,7 @@ jobs:
       - name: Download Dockerfile
         uses: dsaltares/fetch-gh-release-asset@master
         with:
-          version: 'tags/v0.1.11'
+          version: 'tags/${{ github.ref_name }}'
           file: 'Dockerfile'
 
       - name: LS
@@ -50,4 +46,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }},${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ env.GITHUB_REF_NAME }}
+          tags: ${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }},${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
