@@ -36,10 +36,14 @@ java {
     }
 }
 
+jar {
+    archiveBaseName = "customer-service"
+}
+
 springBoot {
     buildInfo {
         properties {
-            name = 'tech challenge api'
+            name = 'Tech Challenge - Customer API'
             additional = [
                     "description": project?.description ?= "",
                     "version"    : project.version
@@ -54,6 +58,7 @@ scmVersion {
         remote = "origin"
     }
 
+    localOnly = true
     versionIncrementer 'incrementPatch'
     branchVersionIncrementer = [
             'hotfix/.*': 'incrementPatch',
