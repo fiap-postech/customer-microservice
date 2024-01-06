@@ -26,5 +26,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build
 
-      - name: Create Release
-        run: ./gradlew release
+      - name: Create Release Tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
+        run: |
+          ./gradlew release \
+            -Prelease.customUsername=${{ GITHUB_ACTOR }} \
+            -Prelease.customPassword=${{ GITHUB_TOKEN }}
