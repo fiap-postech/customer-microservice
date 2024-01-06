@@ -47,3 +47,4 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           name: ${{ env.RELEASE_NAME }}
           tag_name: ${{ env.RELEASE_NAME }}
+          files: ./build/libs/customer-service.jar
