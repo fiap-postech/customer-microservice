@@ -28,10 +28,6 @@ jobs:
           version: 'tags/${{ github.ref_name }}'
           file: 'Dockerfile'
 
-      - name: LS
-        run: |
-          ls -ltr
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
