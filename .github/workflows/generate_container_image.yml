@@ -16,15 +16,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: dsaltares/fetch-gh-release-asset@master
+      - name: ENV
+        run: |
+            env
+
+      - name: Download Jar File
+        uses: dsaltares/fetch-gh-release-asset@master
         with:
           file: "customer-service.jar"
-          target: .
 
-      - uses: dsaltares/fetch-gh-release-asset@master
+      - name: Download Dockerfile
+        uses: dsaltares/fetch-gh-release-asset@master
         with:
           file: Dockerfile
-          target: .
+
+      - name: LS
+        run: |
+          ls -ltr
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
