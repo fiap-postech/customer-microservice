@@ -32,8 +32,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
         run: |
           ./gradlew release \
-            -Prelease.customUsername=${{ GITHUB_ACTOR }} \
-            -Prelease.customPassword=${{ GITHUB_TOKEN }}
+            -Prelease.customUsername=${{ github.actor }} \
+            -Prelease.customPassword=${{ github.token }}
 
       - name: Get Current Release Tag
         run: echo "RELEASE_NAME=$(./gradlew cV -q -Prelease.quiet)" >> $GITHUB_ENV
