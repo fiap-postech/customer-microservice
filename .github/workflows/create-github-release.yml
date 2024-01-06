@@ -37,3 +37,4 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           files: |
             launcher/build/libs/customer-service.jar
+            Dockerfile
