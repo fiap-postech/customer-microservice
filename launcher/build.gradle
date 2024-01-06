@@ -43,7 +43,7 @@ bootJar {
 springBoot {
     buildInfo {
         properties {
-            name = 'Tech Challenge - Customer API'
+            name = 'Tech Challenge - Customer API Service'
             additional = [
                     "description": project?.description ?= "",
                     "version"    : scmVersion.version
