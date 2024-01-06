@@ -8,7 +8,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "P@55W0rD"
     ports:
-      - "3376:3306"
+      - "3366:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       interval: 5s
@@ -20,9 +20,9 @@ services:
       - ./docker/mysql/script/setup.sql:/docker-entrypoint-initdb.d/1.sql
     command: --default-authentication-plugin=mysql_native_password
     networks:
-      - tech-challenge-network-local
+      - tc-customer-network-local
 
 networks:
-  tech-challenge-network-local:
+  tc-customer-network-local:
     driver: bridge
 
