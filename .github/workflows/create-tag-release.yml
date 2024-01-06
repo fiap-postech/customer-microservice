@@ -37,15 +37,3 @@ jobs:
           ./gradlew release \
             -Prelease.customUsername=${{ github.actor }} \
             -Prelease.customPassword=${{ github.token }}
-
-      - name: Get Current Release Tag
-        run: echo "RELEASE_NAME=$(./gradlew cV -q -Prelease.quiet)" >> $GITHUB_ENV
-
-      - name: Create Github Release
-        uses: softprops/action-gh-release@v1
-        with:
-          token: ${{ secrets.RELEASE_TOKEN }}
-          name: ${{ env.RELEASE_NAME }}
-          tag_name: ${{ env.RELEASE_NAME }}
-          files: |
-            launcher/build/libs/customer-service.jar

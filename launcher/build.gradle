@@ -58,7 +58,6 @@ scmVersion {
         remote = "origin"
     }
 
-    localOnly = true
     versionIncrementer 'incrementPatch'
     branchVersionIncrementer = [
             'hotfix/.*': 'incrementPatch',
