@@ -19,10 +19,12 @@ jobs:
       - uses: dsaltares/fetch-gh-release-asset@master
         with:
           file: "customer-service.jar"
+          target: .
 
       - uses: dsaltares/fetch-gh-release-asset@master
         with:
           file: Dockerfile
+          target: .
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -33,9 +35,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker Image
         uses: docker/build-push-action@v4
         with:
-          context: "{{defaultContext}}"
+          context: .
           push: true
           tags: ${{ env.IMAGE_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ env.DEFAULT_TAG }}
