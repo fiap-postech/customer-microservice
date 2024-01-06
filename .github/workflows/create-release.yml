@@ -27,9 +27,20 @@ jobs:
         run: ./gradlew build
 
       - name: Create Release Tag
+        id: tag_release
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}
         run: |
           ./gradlew release \
             -Prelease.customUsername=${{ GITHUB_ACTOR }} \
             -Prelease.customPassword=${{ GITHUB_TOKEN }}
+
+      - name: Get Current Release Tag
+        run: echo "RELEASE_NAME=$(./gradlew cV -q -Prelease.quiet)" >> $GITHUB_ENV
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.JAVA_TOKEN }}
+          name: ${{ RELEASE_NAME }}
+          tag_name: ${{ RELEASE_NAME }}
