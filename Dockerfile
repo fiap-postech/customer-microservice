@@ -24,14 +24,12 @@ COPY . .
 
 RUN gradle build -x test --no-daemon
 
-RUN cp /build/launcher/build/libs/launcher-${VERSION}.jar ./customer-service.jar
-
 
 FROM --platform=linux/amd64 openjdk:17-alpine
 
 WORKDIR /app
 
-COPY --from=builder /build/customer-service.jar ./customer-service.jar
+COPY --from=builder /build/libs/customer-service.jar ./customer-service.jar
 
 RUN /bin/sh -c 'touch /app/customer-service.jar'
 
