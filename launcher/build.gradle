@@ -4,9 +4,8 @@ plugins {
     alias(sharedLibs.plugins.flyway.plugin)
     alias(sharedLibs.plugins.spring.dependency.management.plugin)
     id "org.sonarqube" version "4.4.1.3373"
+    id 'pl.allegro.tech.build.axion-release' version '1.16.1'
 }
-
-version '1.0.0'
 
 dependencies {
     implementation project(":adapter")
@@ -49,6 +48,16 @@ springBoot {
     }
 }
 
+scmVersion {
+    localOnly = true
+    versionIncrementer 'incrementPatch' // increment minor by default
+    branchVersionIncrementer = [
+            'hotfix/.*': 'incrementPatch', // on hotfix branches - increment patch
+    ]
+}
+
+version = scmVersion.version
+
 jacocoTestReport {
     reports {
         xml.required = true
@@ -57,6 +66,7 @@ jacocoTestReport {
 
 sonarqube {
     properties {
+        property 'sonar.gradle.skipCompile', 'true'
         property 'sonar.host.url', 'https://sonarcloud.io'
         property 'sonar.organization', 'fiap-postech'
         property 'sonar.projectKey', 'fiap-postech_customer-microservice'
