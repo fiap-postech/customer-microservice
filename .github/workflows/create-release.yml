@@ -1,0 +1,30 @@
+name: Create Project Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Create New Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available
+
+      - name: Build Project
+        env:
+          GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew build
+
+      - name: Create Release
+        run: ./gradlew release
