@@ -38,7 +38,7 @@ jobs:
       - name: Get Current Release Tag
         run: echo "RELEASE_NAME=$(./gradlew cV -q -Prelease.quiet)" >> $GITHUB_ENV
 
-      - name: Release
+      - name: Create Github Release
         uses: softprops/action-gh-release@v1
         with:
           token: ${{ secrets.RELEASE_TOKEN }}
