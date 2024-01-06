@@ -36,8 +36,8 @@ java {
     }
 }
 
-jar {
-    archiveBaseName = "customer-service"
+bootJar {
+    archiveFileName = "customer-service.jar"
 }
 
 springBoot {
@@ -46,7 +46,7 @@ springBoot {
             name = 'Tech Challenge - Customer API'
             additional = [
                     "description": project?.description ?= "",
-                    "version"    : project.version
+                    "version"    : scmVersion.version
             ]
         }
     }

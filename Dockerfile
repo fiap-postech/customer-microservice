@@ -29,7 +29,7 @@ FROM --platform=linux/amd64 openjdk:17-alpine
 
 WORKDIR /app
 
-COPY --from=builder /build/libs/customer-service.jar ./customer-service.jar
+COPY --from=builder /build/launcher/libs/customer-service.jar ./customer-service.jar
 
 RUN /bin/sh -c 'touch /app/customer-service.jar'
 
