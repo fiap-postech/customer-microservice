@@ -39,5 +39,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         run: |
           ./gradlew release \
+            -Prelease.forceSnapshot \
             -Prelease.customUsername=${{ github.actor }} \
             -Prelease.customPassword=${{ github.token }}
