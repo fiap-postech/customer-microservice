@@ -30,24 +30,6 @@ dependencies {
     testImplementation sharedLibs.testcontainers.mysql
 }
 
-java {
-    processResources {
-        expand(project.properties)
-    }
-}
-
-springBoot {
-    buildInfo {
-        properties {
-            name = 'tech challenge api'
-            additional = [
-                    "description": project?.description ?= "",
-                    "version"    : project.version
-            ]
-        }
-    }
-}
-
 scmVersion {
     repository {
         type = "git"
@@ -59,6 +41,28 @@ scmVersion {
             'hotfix/.*': 'incrementPatch',
             'feature/.*': 'incrementMinor',
     ]
+}
+
+java {
+    processResources {
+        expand(project.properties)
+    }
+}
+
+bootJar {
+    archiveFileName = "customer-service.jar"
+}
+
+springBoot {
+    buildInfo {
+        properties {
+            name = 'Tech Challenge - Customer API'
+            additional = [
+                    "description": project?.description ?= "",
+                    "version"    : scmVersion.version
+            ]
+        }
+    }
 }
 
 version = scmVersion.version
