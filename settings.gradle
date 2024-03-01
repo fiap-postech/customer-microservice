@@ -14,7 +14,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("sharedLibs") {
-            from("br.com.fiap.tech.challenge:gradle-version-catalog:1.0.5")
+            from("br.com.fiap.tech.challenge:gradle-version-catalog:1.0.6")
         }
     }
 }
@@ -34,3 +34,6 @@ findProject(':drivers:mysql')?.name = 'mysql'
 
 include 'drivers:rest'
 findProject(':drivers:rest')?.name = 'rest'
+
+include 'drivers:customer-remove-data-producer'
+findProject(':drivers:customer-remove-data-producer')?.name = 'customer-remove-data-producer'

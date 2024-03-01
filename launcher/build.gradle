@@ -3,8 +3,8 @@ plugins {
     alias(sharedLibs.plugins.spring.boot.plugin)
     alias(sharedLibs.plugins.flyway.plugin)
     alias(sharedLibs.plugins.spring.dependency.management.plugin)
-    id "org.sonarqube" version "4.4.1.3373"
-    id 'pl.allegro.tech.build.axion-release' version '1.16.1'
+    alias(sharedLibs.plugins.sonarqube.plugin)
+    alias(sharedLibs.plugins.axion.release.plugin)
 }
 
 dependencies {
