@@ -1,6 +1,6 @@
 package br.com.fiap.tech.challenge.adapter.gateway.customer;
 
-import br.com.fiap.tech.challenge.adapter.dto.RequestDataRemovalDTO;
+import br.com.fiap.tech.challenge.application.dto.ActionDataRemovalDTO;
 import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalRequestRepository;
 import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
 import br.com.fiap.tech.challenge.enterprise.entity.Customer;
@@ -14,7 +14,7 @@ class PublishDataRemovalRequestGatewayImpl implements PublishDataRemovalRequestG
 
     @Override
     public void publishRequest(DataRemoval data, Customer customer) {
-        var dto = new RequestDataRemovalDTO()
+        var dto = new ActionDataRemovalDTO()
                 .setDocument(customer.toDocument())
                 .setId(data.uuid().toString());
 

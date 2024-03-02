@@ -49,6 +49,7 @@ public class DBCustomerEntityRepositoryImpl implements CustomerWriterRepository,
     private CustomerDTO update(CustomerDTO dto) {
         var customer = loadByUUID(dto.getId());
 
+        customer.setDocument(dto.getDocument());
         customer.setName(dto.getName());
         customer.setEnabled(dto.isEnabled());
         customer.setEmail(dto.getEmail());

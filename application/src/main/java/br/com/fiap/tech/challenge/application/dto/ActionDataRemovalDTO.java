@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge.adapter.dto;
+package br.com.fiap.tech.challenge.application.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @Accessors(chain = true)
-public class RequestDataRemovalDTO implements Serializable {
+public class ActionDataRemovalDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 8677798649557560227L;
 

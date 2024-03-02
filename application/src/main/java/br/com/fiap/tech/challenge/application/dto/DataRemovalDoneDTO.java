@@ -1,4 +1,4 @@
-package br.com.fiap.tech.challenge.customer.driven.customer.producer.dto;
+package br.com.fiap.tech.challenge.application.dto;
 
 import br.com.fiap.tech.challenge.enterprise.enums.DataRemovalStatus;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Data
 @Accessors(chain = true)
-public class DataRemovalDoneEvent implements Serializable {
+public class DataRemovalDoneDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 6734072752820724699L;

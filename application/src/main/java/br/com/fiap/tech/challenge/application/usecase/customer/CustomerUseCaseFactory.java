@@ -32,8 +32,8 @@ public class CustomerUseCaseFactory {
         return new FindDataRemovalByUUIDUseCaseImpl(gateway);
     }
 
-    public static RemoveDataUseCase removeDataUseCase(CustomerReaderGateway readerGateway, CustomerWriterGateway writerGateway) {
-        return new RemoveDataUseCaseImpl(readerGateway, writerGateway);
+    public static RemoveDataUseCase removeDataUseCase(CustomerReaderGateway readerGateway, CustomerWriterGateway writerGateway, PublishDataRemovalResponseGateway responseGateway) {
+        return new RemoveDataUseCaseImpl(readerGateway, writerGateway, responseGateway);
     }
 
     public static RequestDataRemovalUseCase requestDataRemovalUseCase(CustomerReaderGateway customerReaderGateway,
@@ -43,8 +43,7 @@ public class CustomerUseCaseFactory {
     }
 
     public static PublishDataRemovalUseCase publishDataRemovalUseCase(PublishDataRemovalRequestGateway requestGateway,
-                                                                      PublishDataRemovalResponseGateway responseGateway,
                                                                       CustomerReaderGateway customerReaderGateway) {
-        return new PublishDataRemovalUseCaseImpl(requestGateway, responseGateway, customerReaderGateway);
+        return new PublishDataRemovalUseCaseImpl(requestGateway, customerReaderGateway);
     }
 }

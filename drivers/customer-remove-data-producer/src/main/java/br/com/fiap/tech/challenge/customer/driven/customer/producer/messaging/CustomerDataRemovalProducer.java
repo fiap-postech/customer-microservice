@@ -1,12 +1,10 @@
 package br.com.fiap.tech.challenge.customer.driven.customer.producer.messaging;
 
-import br.com.fiap.tech.challenge.adapter.dto.RequestDataRemovalDTO;
 import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalRequestRepository;
 import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalResponseRepository;
-import br.com.fiap.tech.challenge.application.dto.DataRemovalItemDTO;
+import br.com.fiap.tech.challenge.application.dto.ActionDataRemovalDTO;
+import br.com.fiap.tech.challenge.application.dto.DataRemovalDoneDTO;
 import br.com.fiap.tech.challenge.customer.driven.customer.producer.config.EnvironmentProperties;
-import br.com.fiap.tech.challenge.customer.driven.customer.producer.mapping.DataRemovalDoneMapper;
-import br.com.fiap.tech.challenge.customer.driven.customer.producer.mapping.DataRemovalRequestEventMapper;
 import io.awspring.cloud.sns.core.SnsTemplate;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
 import lombok.RequiredArgsConstructor;
@@ -26,16 +24,14 @@ public class CustomerDataRemovalProducer implements PublishDataRemovalRequestRep
 
     private final SnsTemplate sns;
     private final SqsTemplate sqs;
-    private final DataRemovalRequestEventMapper requestEventMapper;
-    private final DataRemovalDoneMapper removalDoneMapper;
 
     @Override
-    public void publish(RequestDataRemovalDTO dto) {
-        sns.convertAndSend(topicName, requestEventMapper.toEvent(dto));
+    public void publish(ActionDataRemovalDTO dto) {
+        sns.convertAndSend(topicName, dto);
     }
 
     @Override
-    public void publish(DataRemovalItemDTO dto) {
-        sqs.send(to -> to.queue(queueName).payload(removalDoneMapper.toEvent(dto)));
+    public void publish(DataRemovalDoneDTO dto) {
+        sqs.send(to -> to.queue(queueName).payload(dto));
     }
 }

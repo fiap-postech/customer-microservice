@@ -20,7 +20,7 @@ class RequestDataRemovalControllerImpl implements RequestDataRemovalController {
     public DataRemovalDTO create(RequestDataRemovalDTO dto) {
         var result = removalUseCase.create(dto);
 
-        publishUseCase.publishRequest(result);
+        publishUseCase.publish(result);
 
         return presenter.present(result);
     }

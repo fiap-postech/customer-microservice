@@ -1,16 +1,18 @@
 package br.com.fiap.tech.challenge.adapter.controller.customer;
 
-import br.com.fiap.tech.challenge.application.dto.DataRemovalDTO;
+import br.com.fiap.tech.challenge.application.dto.ActionDataRemovalDTO;
 import br.com.fiap.tech.challenge.application.usecase.customer.RemoveDataUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 class RemoveDataControllerImpl implements RemoveDataController {
 
-    private final RemoveDataUseCase useCase;
+    private final RemoveDataUseCase removeUseCase;
 
     @Override
-    public DataRemovalDTO remove(DataRemovalDTO dto) {
-        return useCase.remove(dto);
+    @Transactional
+    public void remove(ActionDataRemovalDTO dto) {
+        removeUseCase.remove(dto);
     }
 }

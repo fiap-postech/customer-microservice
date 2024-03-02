@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge.application.gateway;
 
-import br.com.fiap.tech.challenge.enterprise.entity.DataRemovalItem;
+import br.com.fiap.tech.challenge.application.dto.DataRemovalDoneDTO;
 
 public interface PublishDataRemovalResponseGateway {
-    void publishResponse(DataRemovalItem item);
+    void publishResponse(DataRemovalDoneDTO dto);
 }

@@ -1,9 +1,9 @@
 package br.com.fiap.tech.challenge.adapter.repository;
 
-import br.com.fiap.tech.challenge.application.dto.DataRemovalItemDTO;
+import br.com.fiap.tech.challenge.application.dto.DataRemovalDoneDTO;
 
 public interface PublishDataRemovalResponseRepository {
 
-    void publish(DataRemovalItemDTO dto);
+    void publish(DataRemovalDoneDTO dto);
 
 }

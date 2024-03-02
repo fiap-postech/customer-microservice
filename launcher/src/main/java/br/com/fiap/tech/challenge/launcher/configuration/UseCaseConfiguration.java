@@ -59,14 +59,15 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public static RemoveDataUseCase removeDataUseCase(CustomerReaderGateway readerGateway, CustomerWriterGateway writerGateway) {
-        return CustomerUseCaseFactory.removeDataUseCase(readerGateway, writerGateway);
+    public static RemoveDataUseCase removeDataUseCase(CustomerReaderGateway readerGateway,
+                                                      CustomerWriterGateway writerGateway,
+                                                      PublishDataRemovalResponseGateway responseGateway) {
+        return CustomerUseCaseFactory.removeDataUseCase(readerGateway, writerGateway, responseGateway);
     }
 
     @Bean
     public PublishDataRemovalUseCase publishDataRemovalUseCase(PublishDataRemovalRequestGateway requestGateway,
-                                                               PublishDataRemovalResponseGateway responseGateway,
                                                                CustomerReaderGateway customerReaderGateway) {
-        return CustomerUseCaseFactory.publishDataRemovalUseCase(requestGateway, responseGateway, customerReaderGateway);
+        return CustomerUseCaseFactory.publishDataRemovalUseCase(requestGateway, customerReaderGateway);
     }
 }

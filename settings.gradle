@@ -37,3 +37,6 @@ findProject(':drivers:rest')?.name = 'rest'
 
 include 'drivers:customer-remove-data-producer'
 findProject(':drivers:customer-remove-data-producer')?.name = 'customer-remove-data-producer'
+
+include 'drivers:customer-remove-data-action-consumer'
+findProject(':drivers:customer-remove-data-action-consumer')?.name = 'customer-remove-data-action-consumer'
