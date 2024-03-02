@@ -9,12 +9,14 @@ import br.com.fiap.tech.challenge.rest.resource.request.DataRemovalRequest;
 import br.com.fiap.tech.challenge.rest.resource.response.DataRemovalResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,6 +31,7 @@ public class DataRemovalResource implements DataRemovalResourceDoc {
 
     @Override
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public DataRemovalResponse create(@Valid @RequestBody DataRemovalRequest request) {
         var dto = requestController.create(requestMapper.toDTO(request));
         return responseMapper.toResponse(dto);

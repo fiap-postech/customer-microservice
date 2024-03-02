@@ -8,3 +8,11 @@ db:
 spring.data.redis:
   host: redis
   port: 6379
+
+aws:
+  resources:
+    sqs:
+      remove-customer-data.queue: prd-customer-remove-customer-data-queue
+      customer-removed-data.queue: prd-customer-remove-data-response-queue
+    sns:
+      customer-remove-data.topic: prd-customer-remove-data-topic

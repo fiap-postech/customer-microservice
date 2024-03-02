@@ -1,8 +1,6 @@
 package br.com.fiap.tech.challenge.launcher.rest;
 
 import br.com.fiap.tech.challenge.launcher.config.TestConfiguration;
-import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -20,9 +18,8 @@ import static br.com.fiap.tech.challenge.launcher.container.DatabaseContainers.l
 import static br.com.fiap.tech.challenge.launcher.container.LocalStackContainers.localStackContainer;
 import static br.com.fiap.tech.challenge.launcher.util.ConfigurationOverrides.overrideConfiguration;
 import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.emptyString;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS;
-import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
@@ -31,10 +28,10 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 @ActiveProfiles({ "test" })
 @Testcontainers
 @DirtiesContext(classMode = AFTER_CLASS)
-class DisableCustomerResourceIT {
+class QueryCustomerDataRemovalResourceIT {
 
     @Container
-    static MySQLContainer<?> DATABASE = localDatabaseContainer();
+    protected static final MySQLContainer<?> DATABASE = localDatabaseContainer();
 
     @Container
     protected static GenericContainer<?> LOCAL_STACK_CONTAINER = localStackContainer();
@@ -45,39 +42,23 @@ class DisableCustomerResourceIT {
     }
 
     @Test
-    void shouldBeAbleToDisableCustomerByDocument() {
-        var document = "76633036876";
-
+    void shouldGetDataRemoval() {
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when()
-                .patch("/customer/{document}/disable", document)
+                .get("/customer/data/removal/{id}", "c1dc90c3-3e11-4d92-afc6-1702f23e9906")
             .then()
-                .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath("./schemas/CustomerResponseSchema.json"));
+                .statusCode(HttpStatus.OK.value());
     }
 
     @Test
-    void shouldReturnBadRequestWhenGetCustomerWithInvalidDocument() {
-        var document = "32497881885";
-
+    void shouldAnEmptyResponseWhenUseANonExistsId() {
         given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
             .when()
-                .patch("/customer/{document}/disable", document)
+                .get("/customer/data/removal/{id}", "34f312ec-be11-4e20-9422-48523024d208")
             .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value());
-    }
-
-    @Test
-    void shouldReturnNoContentWhenGetCustomerUsingDocumentThatDoesNotExists() {
-        var document = "48826325197";
-
-        given()
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-            .when()
-                .patch("/customer/{document}/disable", document)
-            .then()
-                .statusCode(HttpStatus.NO_CONTENT.value());
+                .statusCode(HttpStatus.NO_CONTENT.value())
+                .body(emptyString());
     }
 }
