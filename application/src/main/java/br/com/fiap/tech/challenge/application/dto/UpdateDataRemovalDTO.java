@@ -9,13 +9,12 @@ import java.io.Serializable;
 
 @Data
 @Accessors
-public class DataRemovalDoneDTO implements Serializable {
+public class UpdateDataRemovalDTO implements Serializable {
 
     @Serial
-    private static final long serialVersionUID = 6734072752820724699L;
+    private static final long serialVersionUID = 393294928879454036L;
 
     private String id;
     private String application;
     private DataRemovalStatus status;
-
 }

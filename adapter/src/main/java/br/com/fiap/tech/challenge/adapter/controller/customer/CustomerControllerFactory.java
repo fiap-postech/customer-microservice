@@ -9,6 +9,7 @@ import br.com.fiap.tech.challenge.application.usecase.customer.FindDataRemovalBy
 import br.com.fiap.tech.challenge.application.usecase.customer.PublishDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RemoveDataUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RequestDataRemovalUseCase;
+import br.com.fiap.tech.challenge.application.usecase.customer.UpdateDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.UpgradeCustomerUseCase;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,10 @@ public class CustomerControllerFactory {
 
     public static RemoveDataController removeDataController(RemoveDataUseCase useCase) {
         return new RemoveDataControllerImpl(useCase);
+    }
+
+    public static UpdateDataRemovalController updateDataRemovalController(UpdateDataRemovalUseCase useCase) {
+        return new UpdateDataRemovalControllerImpl(useCase);
     }
 }
 

@@ -14,6 +14,7 @@ import br.com.fiap.tech.challenge.application.usecase.customer.FindDataRemovalBy
 import br.com.fiap.tech.challenge.application.usecase.customer.PublishDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RemoveDataUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RequestDataRemovalUseCase;
+import br.com.fiap.tech.challenge.application.usecase.customer.UpdateDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.UpgradeCustomerUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,10 +60,16 @@ public class UseCaseConfiguration {
     }
 
     @Bean
-    public static RemoveDataUseCase removeDataUseCase(CustomerReaderGateway readerGateway,
-                                                      CustomerWriterGateway writerGateway,
-                                                      PublishDataRemovalResponseGateway responseGateway) {
+    public RemoveDataUseCase removeDataUseCase(CustomerReaderGateway readerGateway,
+                                               CustomerWriterGateway writerGateway,
+                                               PublishDataRemovalResponseGateway responseGateway) {
         return CustomerUseCaseFactory.removeDataUseCase(readerGateway, writerGateway, responseGateway);
+    }
+
+    @Bean
+    public UpdateDataRemovalUseCase updateDataRemovalUseCase(DataRemovalReaderGateway removalReaderGateway,
+                                                             DataRemovalWriterGateway removalWriterGateway) {
+        return CustomerUseCaseFactory.updateDataRemovalUseCase(removalReaderGateway, removalWriterGateway);
     }
 
     @Bean

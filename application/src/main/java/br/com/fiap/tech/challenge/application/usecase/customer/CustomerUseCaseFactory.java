@@ -42,6 +42,11 @@ public class CustomerUseCaseFactory {
         return new RequestDataRemovalUseCaseImpl(customerReaderGateway, removalReaderGateway, removalWriterGateway);
     }
 
+    public static UpdateDataRemovalUseCase updateDataRemovalUseCase(DataRemovalReaderGateway removalReaderGateway,
+                                                                    DataRemovalWriterGateway removalWriterGateway) {
+        return new UpdateDataRemovalUseCaseImpl(removalReaderGateway, removalWriterGateway);
+    }
+
     public static PublishDataRemovalUseCase publishDataRemovalUseCase(PublishDataRemovalRequestGateway requestGateway,
                                                                       CustomerReaderGateway customerReaderGateway) {
         return new PublishDataRemovalUseCaseImpl(requestGateway, customerReaderGateway);

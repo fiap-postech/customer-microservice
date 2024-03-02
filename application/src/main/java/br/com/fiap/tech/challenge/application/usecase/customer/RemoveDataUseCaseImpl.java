@@ -36,10 +36,10 @@ class RemoveDataUseCaseImpl implements RemoveDataUseCase {
 
         writerGateway.write(customer);
 
-        var response = new DataRemovalDoneDTO()
-                .setApplication("customer-service")
-                .setId(dto.getId())
-                .setStatus(DataRemovalStatus.FINISHED);
+        var response = new DataRemovalDoneDTO();
+        response.setApplication("customer-service");
+        response.setId(dto.getId());
+        response.setStatus(DataRemovalStatus.FINISHED);
 
         responseGateway.publishResponse(response);
 

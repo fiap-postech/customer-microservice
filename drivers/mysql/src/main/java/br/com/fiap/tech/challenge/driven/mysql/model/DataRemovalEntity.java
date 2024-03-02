@@ -6,6 +6,7 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -43,7 +44,7 @@ public class DataRemovalEntity extends JPAEntity{
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime requested;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "customer_data_removal_item", joinColumns = @JoinColumn(name = "removal_id"))
     private List<DataRemovalItem> items;
 }

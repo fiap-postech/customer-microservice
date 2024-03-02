@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+}
+
+version '1.0.0'
+
+dependencies {
+    api platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.1.0")
+    api 'io.awspring.cloud:spring-cloud-aws-starter-sqs'
+
+    compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
+
+    compileOnly project(":adapter")
+}
