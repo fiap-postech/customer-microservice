@@ -4,11 +4,14 @@ import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CustomerWriterGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalWriterGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalResponseGateway;
 import br.com.fiap.tech.challenge.application.usecase.customer.CreateCustomerUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.CustomerUseCaseFactory;
 import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByDocumentUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.FindDataRemovalByUUIDUseCase;
+import br.com.fiap.tech.challenge.application.usecase.customer.PublishDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RemoveDataUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RequestDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.UpgradeCustomerUseCase;
@@ -58,5 +61,12 @@ public class UseCaseConfiguration {
     @Bean
     public static RemoveDataUseCase removeDataUseCase(CustomerReaderGateway readerGateway, CustomerWriterGateway writerGateway) {
         return CustomerUseCaseFactory.removeDataUseCase(readerGateway, writerGateway);
+    }
+
+    @Bean
+    public PublishDataRemovalUseCase publishDataRemovalUseCase(PublishDataRemovalRequestGateway requestGateway,
+                                                               PublishDataRemovalResponseGateway responseGateway,
+                                                               CustomerReaderGateway customerReaderGateway) {
+        return CustomerUseCaseFactory.publishDataRemovalUseCase(requestGateway, responseGateway, customerReaderGateway);
     }
 }

@@ -5,10 +5,14 @@ import br.com.fiap.tech.challenge.adapter.repository.CustomerReaderRepository;
 import br.com.fiap.tech.challenge.adapter.repository.CustomerWriterRepository;
 import br.com.fiap.tech.challenge.adapter.repository.DataRemovalReaderRepository;
 import br.com.fiap.tech.challenge.adapter.repository.DataRemovalWriterRepository;
+import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalRequestRepository;
+import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalResponseRepository;
 import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CustomerWriterGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalWriterGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalResponseGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,8 +35,18 @@ public class GatewayConfiguration {
     }
 
     @Bean
-    public static DataRemovalReaderGateway dataRemovalReaderGateway(DataRemovalReaderRepository repository) {
+    public DataRemovalReaderGateway dataRemovalReaderGateway(DataRemovalReaderRepository repository) {
         return CustomerGatewayFactory.dataRemovalReaderGateway(repository);
+    }
+
+    @Bean
+    public PublishDataRemovalRequestGateway publishDataRemovalRequestGateway(PublishDataRemovalRequestRepository requestRepository) {
+        return CustomerGatewayFactory.publishDataRemovalRequestGateway(requestRepository);
+    }
+
+    @Bean
+    public PublishDataRemovalResponseGateway publishDataRemovalResponseGateway(PublishDataRemovalResponseRepository responseRepository) {
+        return CustomerGatewayFactory.publishDataRemovalResponseGateway(responseRepository);
     }
 
 }

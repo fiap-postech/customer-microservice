@@ -4,6 +4,8 @@ import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CustomerWriterGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalWriterGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalResponseGateway;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -38,5 +40,11 @@ public class CustomerUseCaseFactory {
                                                                       DataRemovalReaderGateway removalReaderGateway,
                                                                       DataRemovalWriterGateway removalWriterGateway) {
         return new RequestDataRemovalUseCaseImpl(customerReaderGateway, removalReaderGateway, removalWriterGateway);
+    }
+
+    public static PublishDataRemovalUseCase publishDataRemovalUseCase(PublishDataRemovalRequestGateway requestGateway,
+                                                                      PublishDataRemovalResponseGateway responseGateway,
+                                                                      CustomerReaderGateway customerReaderGateway) {
+        return new PublishDataRemovalUseCaseImpl(requestGateway, responseGateway, customerReaderGateway);
     }
 }

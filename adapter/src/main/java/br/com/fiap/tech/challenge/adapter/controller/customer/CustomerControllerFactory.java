@@ -6,6 +6,7 @@ import br.com.fiap.tech.challenge.application.usecase.customer.CreateCustomerUse
 import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByDocumentUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.FindCustomerByUUIDUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.FindDataRemovalByUUIDUseCase;
+import br.com.fiap.tech.challenge.application.usecase.customer.PublishDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RemoveDataUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.RequestDataRemovalUseCase;
 import br.com.fiap.tech.challenge.application.usecase.customer.UpgradeCustomerUseCase;
@@ -31,8 +32,8 @@ public class CustomerControllerFactory {
         return new UpgradeCustomerControllerImpl(useCase, presenter);
     }
 
-    public static RequestDataRemovalController requestDataRemovalController(RequestDataRemovalUseCase useCase, DataRemovalPresenter presenter) {
-        return new RequestDataRemovalControllerImpl(useCase, presenter);
+    public static RequestDataRemovalController requestDataRemovalController(RequestDataRemovalUseCase removalUseCase, PublishDataRemovalUseCase publishUseCase, DataRemovalPresenter presenter) {
+        return new RequestDataRemovalControllerImpl(removalUseCase, publishUseCase, presenter);
     }
 
     public static FindDataRemovalByUUIDController findDataRemovalByUUIDController(FindDataRemovalByUUIDUseCase useCase, DataRemovalPresenter presenter) {

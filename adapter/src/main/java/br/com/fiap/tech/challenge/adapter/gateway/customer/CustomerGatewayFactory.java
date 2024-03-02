@@ -4,10 +4,14 @@ import br.com.fiap.tech.challenge.adapter.repository.CustomerReaderRepository;
 import br.com.fiap.tech.challenge.adapter.repository.CustomerWriterRepository;
 import br.com.fiap.tech.challenge.adapter.repository.DataRemovalReaderRepository;
 import br.com.fiap.tech.challenge.adapter.repository.DataRemovalWriterRepository;
+import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalRequestRepository;
+import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalResponseRepository;
 import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CustomerWriterGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalWriterGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
+import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalResponseGateway;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -28,5 +32,13 @@ public class CustomerGatewayFactory {
 
     public static DataRemovalReaderGateway dataRemovalReaderGateway(DataRemovalReaderRepository repository) {
         return new DataRemovalReaderGatewayImpl(repository);
+    }
+
+    public static PublishDataRemovalRequestGateway publishDataRemovalRequestGateway(PublishDataRemovalRequestRepository requestRepository) {
+        return new PublishDataRemovalRequestGatewayImpl(requestRepository);
+    }
+
+    public static PublishDataRemovalResponseGateway publishDataRemovalResponseGateway(PublishDataRemovalResponseRepository responseRepository) {
+        return new PublishDataRemovalResponseGatewayImpl(responseRepository);
     }
 }
