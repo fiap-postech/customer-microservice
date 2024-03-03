@@ -30,8 +30,8 @@ class RemoveDataUseCaseImpl implements RemoveDataUseCase {
         customer = customer.toBuilder()
                 .enabled(false)
                 .document(Document.of(null))
-                .email(EmailRegistration.of("removido@techchallenge.com.br"))
-                .name("CONSUMIDOR - DATA REMOVAL")
+                .email(EmailRegistration.of("consumidor.removido@techchallenge.com.br"))
+                .name("CONSUMIDOR REMOVIDO")
                 .build();
 
         writerGateway.write(customer);
