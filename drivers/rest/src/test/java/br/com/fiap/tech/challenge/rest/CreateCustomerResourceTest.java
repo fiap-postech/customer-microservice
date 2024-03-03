@@ -2,14 +2,12 @@ package br.com.fiap.tech.challenge.rest;
 
 import br.com.fiap.tech.challenge.adapter.controller.customer.CreateCustomerController;
 import br.com.fiap.tech.challenge.application.dto.CreateCustomerDTO;
-import br.com.fiap.tech.challenge.fixture.Fixture;
 import br.com.fiap.tech.challenge.rest.mapping.CreateCustomerMapper;
 import br.com.fiap.tech.challenge.rest.mapping.CustomerResponseMapper;
 import br.com.fiap.tech.challenge.rest.resource.CreateCustomerResource;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import static br.com.fiap.tech.challenge.fixture.CreateCustomerDTOFixture.createCustomerDTOModel;
 import static br.com.fiap.tech.challenge.fixture.CreateCustomerRequestFixture.createCustomerRequestModel;
 import static br.com.fiap.tech.challenge.fixture.CustomerDTOFixture.enabledCustomerDTOModel;
 import static br.com.fiap.tech.challenge.fixture.Fixture.create;

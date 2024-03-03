@@ -3,8 +3,20 @@ server.port: 8689
 spring:
   flyway:
     locations: classpath:/db/migration,classpath:/db/test
+  cloud:
+    aws:
+      endpoint: http://localhost:4566
+      region:
+        static: us-east-1
 
 logging:
   level:
     com.zaxxer.hikari.pool: DEBUG
 
+aws:
+  resources:
+    sqs:
+      remove-customer-data.queue: local-customer-remove-customer-data-queue
+      customer-removed-data.queue: local-customer-remove-data-response-queue
+    sns:
+      customer-remove-data.topic: local-customer-remove-data-topic

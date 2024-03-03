@@ -12,6 +12,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serial;
 import java.util.UUID;
+
+import static java.util.Objects.isNull;
+
 @Getter
 @Accessors(fluent = true)
 public class Customer extends Entity {
@@ -51,7 +54,7 @@ public class Customer extends Entity {
     }
 
     public String toEmail() {
-        return email.email();
+        return isNull(email) ? null : email.email();
     }
 
     @Override

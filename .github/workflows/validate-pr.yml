@@ -36,6 +36,9 @@ jobs:
 
       - name: Build and analyze
         env:
+          AWS_REGION: us-east-1
+          AWS_ACCESS_KEY_ID: localstackAccessKeyId
+          AWS_SECRET_ACCESS_KEY: localstackSecretAccessKey
           GITHUB_TOKEN: ${{ secrets.JAVA_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build jacocoTestReport sonar --info

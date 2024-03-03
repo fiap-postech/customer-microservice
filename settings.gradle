@@ -34,3 +34,12 @@ findProject(':drivers:mysql')?.name = 'mysql'
 
 include 'drivers:rest'
 findProject(':drivers:rest')?.name = 'rest'
+
+include 'drivers:customer-remove-data-producer'
+findProject(':drivers:customer-remove-data-producer')?.name = 'customer-remove-data-producer'
+
+include 'drivers:customer-remove-data-action-consumer'
+findProject(':drivers:customer-remove-data-action-consumer')?.name = 'customer-remove-data-action-consumer'
+
+include 'drivers:customer-remove-data-response-consumer'
+findProject(':drivers:customer-remove-data-response-consumer')?.name = 'customer-remove-data-response-consumer'

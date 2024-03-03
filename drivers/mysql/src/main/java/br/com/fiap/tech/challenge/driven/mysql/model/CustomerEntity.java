@@ -26,8 +26,7 @@ public class CustomerEntity extends JPAEntity{
     @Column(columnDefinition = "text")
     private String email;
 
-    @NotBlank
-    @Column(columnDefinition = "text")
+    @Column
     private String document;
 
     private boolean enabled;

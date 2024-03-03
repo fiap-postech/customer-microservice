@@ -10,4 +10,8 @@ public class PresenterFactory {
         return new CustomerPresenterImpl();
     }
 
+    public static DataRemovalPresenter dataRemovalPresenter() {
+        return new DataRemovalPresenterImpl();
+    }
+
 }

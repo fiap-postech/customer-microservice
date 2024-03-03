@@ -11,6 +11,9 @@ dependencies {
     implementation project(":adapter")
     implementation project(":drivers:mysql")
     implementation project(":drivers:rest")
+    implementation project(":drivers:customer-remove-data-producer")
+    implementation project(":drivers:customer-remove-data-action-consumer")
+    implementation project(":drivers:customer-remove-data-response-consumer")
     implementation sharedLibs.spring.boot.starter.actuator
     implementation sharedLibs.spring.boot.starter.data.jpa
     implementation sharedLibs.spring.boot.starter.logging

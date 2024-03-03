@@ -7,3 +7,18 @@ db:
   username: sys_customer
   password: customer_6#233zJMNTjkQb#sgps#
   port: 3366
+
+aws:
+  resources:
+    sqs:
+      remove-customer-data.queue: local-customer-remove-customer-data-queue
+      customer-removed-data.queue: local-customer-remove-data-response-queue
+    sns:
+      customer-remove-data.topic: local-customer-remove-data-topic
+
+spring:
+  cloud:
+    aws:
+      endpoint: http://localhost:4566
+      region:
+        static: us-east-1

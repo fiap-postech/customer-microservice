@@ -13,7 +13,7 @@ public class Document extends ValueObject {
     private static final long serialVersionUID = -7027977210412190271L;
 
     @SuppressWarnings({"java:S1700"})
-    @DocumentCustomer
+    @DocumentCustomer(required = false)
     private final String document;
 
     private Document(String document) {

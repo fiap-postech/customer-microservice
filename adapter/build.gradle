@@ -14,6 +14,7 @@ dependencies {
     testImplementation sharedLibs.spring.boot.starter.test
     testImplementation sharedLibs.spring.boot.starter.validation
 
+    compileOnly "org.springframework:spring-tx:${sharedLibs.versions.springVersion.get()}"
 
     api project(":application")
 }

@@ -1,5 +1,5 @@
 [versions]
-domainCommonVersion = "1.0.4"
+domainCommonVersion = "1.0.5"
 restCommonVersion = "1.0.0"
 
 [libraries]

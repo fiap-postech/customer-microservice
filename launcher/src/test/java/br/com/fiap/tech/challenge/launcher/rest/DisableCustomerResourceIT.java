@@ -9,11 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static br.com.fiap.tech.challenge.launcher.container.DatabaseContainers.localDatabaseContainer;
+import static br.com.fiap.tech.challenge.launcher.container.LocalStackContainers.localStackContainer;
+import static br.com.fiap.tech.challenge.launcher.util.ConfigurationOverrides.overrideConfiguration;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS;
@@ -28,21 +33,15 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
 @DirtiesContext(classMode = AFTER_CLASS)
 class DisableCustomerResourceIT {
 
-    private static final int LOCAL_PORT = 8689;
-
     @Container
     static MySQLContainer<?> DATABASE = localDatabaseContainer();
 
-    @BeforeAll
-    static void beforeAll() {
-        System.setProperty("spring.datasource.url", DATABASE.getJdbcUrl());
-        System.setProperty("spring.datasource.username", DATABASE.getUsername());
-        System.setProperty("spring.datasource.password", DATABASE.getPassword());
+    @Container
+    protected static GenericContainer<?> LOCAL_STACK_CONTAINER = localStackContainer();
 
-        System.setProperty("server.port", String.valueOf(LOCAL_PORT));
-
-        RestAssured.port = LOCAL_PORT;
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+    @DynamicPropertySource
+    static void overrideConfig(DynamicPropertyRegistry registry) {
+        overrideConfiguration(registry, DATABASE, LOCAL_STACK_CONTAINER);
     }
 
     @Test
