@@ -2,12 +2,14 @@ package br.com.fiap.tech.challenge.adapter.gateway.customer;
 
 import br.com.fiap.tech.challenge.adapter.repository.CustomerReaderRepository;
 import br.com.fiap.tech.challenge.adapter.repository.CustomerWriterRepository;
+import br.com.fiap.tech.challenge.adapter.repository.DataRemovalInquiryRepository;
 import br.com.fiap.tech.challenge.adapter.repository.DataRemovalReaderRepository;
 import br.com.fiap.tech.challenge.adapter.repository.DataRemovalWriterRepository;
 import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalRequestRepository;
 import br.com.fiap.tech.challenge.adapter.repository.PublishDataRemovalResponseRepository;
 import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CustomerWriterGateway;
+import br.com.fiap.tech.challenge.application.gateway.DataRemovalInquiryGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalWriterGateway;
 import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
@@ -40,5 +42,9 @@ public class CustomerGatewayFactory {
 
     public static PublishDataRemovalResponseGateway publishDataRemovalResponseGateway(PublishDataRemovalResponseRepository responseRepository) {
         return new PublishDataRemovalResponseGatewayImpl(responseRepository);
+    }
+
+    public static DataRemovalInquiryGateway dataRemovalInquiryGateway(DataRemovalInquiryRepository repository) {
+        return new DataRemovalInquiryGatewayImpl(repository);
     }
 }

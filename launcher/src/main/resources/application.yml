@@ -9,6 +9,7 @@ spring:
     password: \${db.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa.hibernate.ddl-auto: none
+  cloud.aws.s3.path-style-access-enabled: true
 
 server.port: 8080
 

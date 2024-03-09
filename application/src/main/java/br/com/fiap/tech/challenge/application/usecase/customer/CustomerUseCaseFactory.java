@@ -2,6 +2,7 @@ package br.com.fiap.tech.challenge.application.usecase.customer;
 
 import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CustomerWriterGateway;
+import br.com.fiap.tech.challenge.application.gateway.DataRemovalInquiryGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalWriterGateway;
 import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
@@ -38,8 +39,9 @@ public class CustomerUseCaseFactory {
 
     public static RequestDataRemovalUseCase requestDataRemovalUseCase(CustomerReaderGateway customerReaderGateway,
                                                                       DataRemovalReaderGateway removalReaderGateway,
-                                                                      DataRemovalWriterGateway removalWriterGateway) {
-        return new RequestDataRemovalUseCaseImpl(customerReaderGateway, removalReaderGateway, removalWriterGateway);
+                                                                      DataRemovalWriterGateway removalWriterGateway,
+                                                                      DataRemovalInquiryGateway inquiryGateway) {
+        return new RequestDataRemovalUseCaseImpl(customerReaderGateway, removalReaderGateway, removalWriterGateway, inquiryGateway);
     }
 
     public static UpdateDataRemovalUseCase updateDataRemovalUseCase(DataRemovalReaderGateway removalReaderGateway,
