@@ -5,8 +5,12 @@ import br.com.fiap.tech.challenge.customer.driven.customer.data.removal.response
 import br.com.fiap.tech.challenge.customer.driven.customer.producer.config.CustomerProducerConfiguration;
 import br.com.fiap.tech.challenge.driven.mysql.config.MySQLConfiguration;
 import br.com.fiap.tech.challenge.rest.config.RestConfiguration;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.awspring.cloud.sqs.operations.SqsTemplate;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import software.amazon.awssdk.services.sqs.SqsAsyncClient;
 
 @Configuration
 @Import({
@@ -17,4 +21,15 @@ import org.springframework.context.annotation.Import;
         DataRemovalResponseConsumerConfiguration.class
 })
 public class MainConfiguration {
+
+    @Bean
+    public SqsTemplate sqsTemplate(SqsAsyncClient client, ObjectMapper mapper) {
+        return SqsTemplate.builder()
+                .sqsAsyncClient(client)
+                .configureDefaultConverter(converter -> {
+                    converter.setObjectMapper(mapper);
+                    converter.setPayloadTypeHeaderValueFunction(m -> null);
+                })
+                .build();
+    }
 }
