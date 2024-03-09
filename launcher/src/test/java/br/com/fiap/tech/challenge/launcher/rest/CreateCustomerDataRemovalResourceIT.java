@@ -1,7 +1,7 @@
 package br.com.fiap.tech.challenge.launcher.rest;
 
 import br.com.fiap.tech.challenge.launcher.config.TestConfiguration;
-import br.com.fiap.tech.challenge.rest.resource.request.CreateCustomerRequest;
+import br.com.fiap.tech.challenge.rest.resource.request.DataRemovalRequest;
 import org.instancio.Model;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,15 +23,10 @@ import java.util.stream.Stream;
 import static br.com.fiap.tech.challenge.launcher.container.DatabaseContainers.localDatabaseContainer;
 import static br.com.fiap.tech.challenge.launcher.container.LocalStackContainers.localStackContainer;
 import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerDataRemovalRequestFixture.consumerCustomerDataRemovalRequestModel;
+import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerDataRemovalRequestFixture.customerDataRemovalInvalidDataEmailRequestModel;
+import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerDataRemovalRequestFixture.customerDataRemovalInvalidDataNameRequestModel;
 import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerDataRemovalRequestFixture.customerDataRemovalRequestModel;
 import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerDataRemovalRequestFixture.customerWithAnExistantDataRemovalRequestModel;
-import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerRequestFixture.createCustomerRequestDocumentAlreadyRegisteredModel;
-import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerRequestFixture.createCustomerRequestInvalidDocumentModel;
-import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerRequestFixture.createCustomerRequestInvalidEmailModel;
-import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerRequestFixture.createCustomerRequestMissingDocumentModel;
-import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerRequestFixture.createCustomerRequestMissingEmailModel;
-import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerRequestFixture.createCustomerRequestMissingNameModel;
-import static br.com.fiap.tech.challenge.launcher.fixture.CreateCustomerRequestFixture.createCustomerRequestModel;
 import static br.com.fiap.tech.challenge.launcher.fixture.Fixture.create;
 import static br.com.fiap.tech.challenge.launcher.util.ConfigurationOverrides.overrideConfiguration;
 import static io.restassured.RestAssured.given;
@@ -86,6 +81,21 @@ class CreateCustomerDataRemovalResourceIT {
                 .body(matchesJsonSchemaInClasspath("./schemas/APIErrorSchema.json"));
     }
 
+    @ParameterizedTest
+    @MethodSource("invalidDataSource")
+    void shouldGetAnErrorWhenTryToRemoveDataFromConsumerWithInvalidRequestData(Model<DataRemovalRequest> model) {
+        var request = create(model);
+
+        given()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(request)
+                .when()
+                .post("/customer/data/removal")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body(matchesJsonSchemaInClasspath("./schemas/APIErrorSchema.json"));
+    }
+
     @Test
     void shouldGetAnErrorWhenTryToRemoveDataFromACustomerThatAlreadyHadThisRequestKind() {
         var request = create(customerWithAnExistantDataRemovalRequestModel());
@@ -98,5 +108,12 @@ class CreateCustomerDataRemovalResourceIT {
                 .then()
                 .statusCode(HttpStatus.CONFLICT.value())
                 .body(matchesJsonSchemaInClasspath("./schemas/APIErrorSchema.json"));
+    }
+
+    static Stream<Model<DataRemovalRequest>> invalidDataSource() {
+        return Stream.of(
+                customerDataRemovalInvalidDataNameRequestModel(),
+                customerDataRemovalInvalidDataEmailRequestModel()
+        );
     }
 }

@@ -18,6 +18,7 @@ public enum ApplicationError implements BaseApplicationError {
     CONSUMER_MAY_NOT_BY_REMOVED("AE-005", INVALID_PARAMETER, TRUE, "Consumer customer may not have his data removed"),
     CUSTOMER_REMOVAL_ALREADY_DONE("AE-006", CONFLICT, TRUE, "Customer data was already removed [uuid={}]"),
     DATA_REMOVAL_REQUEST_NOT_FOUND("AE-007", INVALID_PARAMETER, TRUE, "Customer data removal request not found"),
+    CUSTOMER_MAY_NOT_BY_REMOVED("AE-008", INVALID_PARAMETER, TRUE, "Customer may not be removed"),
     ;
 
     private final String code;

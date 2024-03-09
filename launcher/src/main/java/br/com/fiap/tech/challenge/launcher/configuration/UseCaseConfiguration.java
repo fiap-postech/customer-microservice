@@ -2,6 +2,7 @@ package br.com.fiap.tech.challenge.launcher.configuration;
 
 import br.com.fiap.tech.challenge.application.gateway.CustomerReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.CustomerWriterGateway;
+import br.com.fiap.tech.challenge.application.gateway.DataRemovalInquiryGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalReaderGateway;
 import br.com.fiap.tech.challenge.application.gateway.DataRemovalWriterGateway;
 import br.com.fiap.tech.challenge.application.gateway.PublishDataRemovalRequestGateway;
@@ -50,12 +51,14 @@ public class UseCaseConfiguration {
     @Bean
     public RequestDataRemovalUseCase requestDataRemovalUseCase(CustomerReaderGateway customerReaderGateway,
                                                                DataRemovalReaderGateway removalReaderGateway,
-                                                               DataRemovalWriterGateway removalWriterGateway) {
+                                                               DataRemovalWriterGateway removalWriterGateway,
+                                                               DataRemovalInquiryGateway inquiryGateway) {
 
         return CustomerUseCaseFactory.requestDataRemovalUseCase(
                 customerReaderGateway,
                 removalReaderGateway,
-                removalWriterGateway
+                removalWriterGateway,
+                inquiryGateway
         );
     }
 

@@ -14,6 +14,7 @@ dependencies {
     implementation project(":drivers:customer-remove-data-producer")
     implementation project(":drivers:customer-remove-data-action-consumer")
     implementation project(":drivers:customer-remove-data-response-consumer")
+    implementation project(":drivers:customer-remove-data-inquiry-producer")
     implementation sharedLibs.spring.boot.starter.actuator
     implementation sharedLibs.spring.boot.starter.data.jpa
     implementation sharedLibs.spring.boot.starter.logging

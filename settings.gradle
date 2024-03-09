@@ -43,3 +43,6 @@ findProject(':drivers:customer-remove-data-action-consumer')?.name = 'customer-r
 
 include 'drivers:customer-remove-data-response-consumer'
 findProject(':drivers:customer-remove-data-response-consumer')?.name = 'customer-remove-data-response-consumer'
+
+include 'drivers:customer-remove-data-inquiry-producer'
+findProject(':drivers:customer-remove-data-inquiry-producer')?.name = 'customer-remove-data-inquiry-producer'
